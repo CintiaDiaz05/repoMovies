@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Movies by CD</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/stylesheets/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header>
+						<h1>TP Movies by CD</h1>
+						</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="/peliculas" class="active">Peliculas</a></li>
+							<li><a href="/actores">Actores</a></li>
+							<li><a href="#second">Generos</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+											<h2>Editar Película</h2>
+                    <form class="login" action="/peliculas/editar" method="POST">
+                      <label for="titulo">
+                         <h3>Titulo:</h3>
+                      </label>
+                      <input class="input" type="text" id="titulo" name="titulo" value="<%=pelicula.title%>">
+                      
+                      <label for="premios">
+                         <h3>Premios:</h3>
+                      </label>
+                      <input class="input" type="text" id="premios" name="premios" value="<%=pelicula.awards%>">
+                      
+                      <label for="duracion">
+                        <h3>Duracion:</h3>
+                     </label>
+                     <input class="input" type="text" id="duracion" name="duracion" value="<%=pelicula.length%>">
+                         
+                     <label for="rating">
+                     
+                      <h3>Fecha de estreno:</h3>
+                      </label>
+                      <input class="input" type="text" id="fecha" name="fecha" value="<%=pelicula.release_date%>">
+                      
+                      <label for="rating">
+                        <h3>Rating:</h3>
+                      </label>
+                      <input class="input" type="text" id="rating" name="rating" value="<%=pelicula.rating%>">
+
+                      <label for="genero">
+                        <h3>Genero:</h3>
+                      </label>
+                      <select name="genero" id="genero">
+                        <%if (pelicula.genre_id){%>
+                            <option value="<%=pelicula.genre_id%>" selected>
+                              <%=pelicula.genero.name%>
+                        <%} else { %>
+                            <option value="">
+                        <%}%>
+                            </option>
+                            </select>
+                      <label for="actores">
+                              <h3>Actores:</h3>
+                      </label>
+                      <table>
+                        <tr>
+                          <td>#</td>
+                          <td>Nombre</td>
+                          <td>Apellido</td>
+                        </tr>
+                        <%if(pelicula.actores.length) {%>
+                        <%for (let i=0;i < pelicula.actores.length;i++){%>
+                        <tr>
+                          <td><%=i+1%></td>
+                          <td><%=pelicula.actores[i].first_name%></td>
+                          <td><%=pelicula.actores[i].last_name%></td>
+                        </tr>
+                        <%} 
+                        } else {%>
+                          <tr>
+                            <td colspan="3" align="center">No existen Actores asignados a la película.</td>
+                          </tr>
+                        <%}%>
+
+                       
+
+                      </table>                    
+                 
+                      <div class="align">
+                         <button class="button" type="submit">GUARDAR</button>
+                      </div>
+                   </form>
+
+									
+									</div>
+								</div>
+							</section>
+
+					
+				<!-- Footer -->
+					<footer id="footer">
+					<p class="copyright">Cintia Diaz &copy; 2020.</p>
+					</footer>
+
+			</div>
+
+
+	</body>
+</html>
+

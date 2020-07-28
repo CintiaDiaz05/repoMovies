@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Movies by CD</title>
+		<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+		<link rel="stylesheet" href="/stylesheets/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+        <!-- Header -->
+        <header>
+          <h1>TP Movies by CD</h1>
+          </header>
+      
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li><a href="/">Peliculas</a></li>
+                <li><a href="/actores">Actores</a></li>
+                <li><a href="/generos" class="active">Generos</a></li>
+            </ul>
+        </nav>
+					
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+                      <h1>Listado de Géneros</h1>
+                      <table>
+                        <tr>
+                          <th>#</th>
+                          <th>Nombre</th>
+                          <th>Ranking</th>
+                        </tr>
+                        <%for (let i=0;i < generos.length;i++){%>
+                          <tr>
+                            <th><%=i+1%></th>
+                            <th><a href="/generos/detalle/<%=generos[i].id%>"><%=generos[i].name%>&nbsp;<i class='fas fa-pencil-alt'></i></a></th>
+                            <th><%=generos[i].ranking;%>&nbsp;<i class='fas fa-star'></i></th>
+                            </tr>
+                          <%}%>
+
+                      </table>
+
+                   									
+									</div>
+								</div>
+							</section>
+
+					
+				<!-- Footer -->
+					<footer id="footer">
+					<p class="copyright">Cintia Diaz &copy; 2020.</p>
+					</footer>
+
+			</div>
+
+
+	</body>
+</html>
+
