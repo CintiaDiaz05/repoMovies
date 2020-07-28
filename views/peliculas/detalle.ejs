@@ -3,7 +3,8 @@
 	<head>
 		<title>Movies by CD</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 		<link rel="stylesheet" href="/stylesheets/main.css" />
 	</head>
 	<body class="is-preload">
@@ -32,7 +33,7 @@
 							<section id="intro" class="main">
 								<div class="spotlight">
 									<div class="content">
-											<h2>Editar Película</h2>
+											<h2>Editar Película   <input  type="text" id="idPeli" name="idPeli" value="<%=pelicula.id%>"></h2>
                     <form class="login" action="/peliculas/editar" method="POST">
                       <label for="titulo">
                          <h3>Titulo:</h3>
@@ -80,6 +81,7 @@
                           <td>#</td>
                           <td>Nombre</td>
                           <td>Apellido</td>
+                          <td>&nbsp;</td>
                         </tr>
                         <%if(pelicula.actores.length) {%>
                         <%for (let i=0;i < pelicula.actores.length;i++){%>
@@ -87,6 +89,7 @@
                           <td><%=i+1%></td>
                           <td><%=pelicula.actores[i].first_name%></td>
                           <td><%=pelicula.actores[i].last_name%></td>
+                          <td><a href="/peliculas/eliminarActorDetalle/<%=pelicula.actores[i].id%>/<%=pelicula.id%>"><i class='fas fa-trash-alt'></i></a></td>
                         </tr>
                         <%} 
                         } else {%>
@@ -94,11 +97,21 @@
                             <td colspan="3" align="center">No existen Actores asignados a la película.</td>
                           </tr>
                         <%}%>
-
-                       
-
-                      </table>                    
+                      </table> 
+                      <label for="actor">
+                        <h3>Agregar Actor:</h3>
+                      </label>
+                      <select name="actor" id="actor">
+                        <%for (let i=0;i < actors.length;i++){%>
+                            <option value="<%=actors[i].id%>">
+                              <%=actors[i].first_name  + " " + actors[i].last_name%></option>
+                        <%}%>
+                            <option value="" selected>
+                            </option>
+                            </select>
+                      
                  
+
                       <div class="align">
                          <button class="button" type="submit">GUARDAR</button>
                       </div>

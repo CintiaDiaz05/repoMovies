@@ -25,15 +25,23 @@ const peliculasController = {
 			})
     },
     detalle: (req, res, next) => {
-        console.log("--------------------DETALLE------------------>");
-        //db.Genero.findAll()
-        db.Pelicula.findByPk(Number(req.params.id),{
+            console.log("--------------------DETALLE------------------>");
+            //db.Genero.findAll()
+            db.Pelicula.findByPk(Number(req.params.id),{
             	include: [{ association: "actores" },{ association: "genero" }]
-			})
-		    .then(function (pelicula) {
-                console.log(pelicula);
-				res.render('./peliculas/detalle', {pelicula:pelicula})
-			})
+            })
+            //let actores = db.Actor.findAll()
+            
+            //Promise.all([peli, actores])
+               // .then(([peli, actores]) => {
+                .then(function (peli) {
+                    db.Actor.findAll()
+                    .then(function (actores) {
+                    res.render('./peliculas/detalle', {pelicula:peli, actors:actores});
+                    })
+                })
+
+		  
 			.catch(function (error) {
 				console.log(error);
 			})
@@ -73,9 +81,32 @@ const peliculasController = {
 				console.log(error);
 			})
     },
-    eliminar: (req, res, next) => {
+    eliminarActorDetalle: (req, res, next) => {
         console.log("--------------------ELIMINAR------------------>");
-        let idPelicula = Number(req.params.id)
+        let idActor = Number(req.params.id);
+        let idPelicula =Number(req.params.peli);
+        db.Actor_movie.destroy({
+            where: {
+                movie_id: idPelicula,
+                actor_id: idActor
+            }
+        })
+        
+            .then((items) => {
+               // res.render('./peliculas/detalle', {pelicula:pelicula})
+               res.redirect('/');
+            })
+            .catch(function (error) {
+				console.log(error);
+			})
+        
+             
+
+    },
+    eliminar:(req, res, next) => {
+        console.log("--------------------ELIMINAR------------------>");
+        let idPelicula = Number(req.params.peli)
+        let idActor = Number(req.params.id)
         db.Actor_movie.destroy({
             where: {
                 movie_id: idPelicula
@@ -101,8 +132,9 @@ const peliculasController = {
     },
     editar: (req, res, next) => {
         console.log("--------------------EDITAR------------------>");
-        let idPelicula =1;// Number(req.params.id)
-       
+        let idPelicula =Number(req.body.idPeli); //no trae el id no se xq
+        console.log(req.body.idPeli);
+        console.log(req.body.actor);
         db.Pelicula.update(
             {
                 title: req.body.titulo,
@@ -116,8 +148,11 @@ const peliculasController = {
                 id: idPelicula
             }
         })
-            .then((cartProducts) => {
-
+            .then((peliculon) => {
+                db.Actor_movie.create({
+                    actor_id: Number(req.body.actor),
+                    movie_id: peliculon.id
+                })
                     res.redirect('/');
                 })
 

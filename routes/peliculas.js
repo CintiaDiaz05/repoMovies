@@ -12,5 +12,6 @@ router.get('/crear', peliculasController.list_crear);
 router.post('/crear', peliculasController.crear);
 router.get('/eliminar/:id', peliculasController.eliminar);
 router.post('/editar', peliculasController.editar);
+router.get('/eliminarActorDetalle/:id/:peli', peliculasController.eliminarActorDetalle);
 
 module.exports = router;
